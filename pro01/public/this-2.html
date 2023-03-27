@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>this 키워드의 차이</title>
+	<script>
+		const test ={
+				a:function(){
+					console.log(this)
+				},
+				b:()=>{
+					console.log(this)
+				}
+		}
+		
+		test.a()
+		test.b()
+	</script>
+</head>
+<body>
+
+</body>
+</html>

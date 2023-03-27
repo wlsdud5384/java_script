@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>이벤트 막기 체크 때만 활성화</title>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			let status = false
+			
+			const checkbox = document.querySelector('input')
+			checkbox.addEventListener('change',(event)=> {
+				status = event.currentTarget.checked
+			})
+			
+			const link = document.querySelector('a')
+			link.addEventListener('click', (event)=> {
+				if(!status) {
+					event.preventDefault  //() 메소드 호출 하면 적용된다.
+				}
+			})
+		})
+	</script>
+</head>
+<body>
+	<input type="checkbox">
+	<span>링크 활성화</span>
+	<br>
+	<a href="https://www.google.com/search?q=%EC%98%81%EB%B0%95%EC%82%AC&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiKu4OG44f8AhVM1GEKHTWBBdEQ_AUoAXoECAEQAw&cshid=1671524784164969&biw=1021&bih=959&dpr=1">한빛미디어</a>
+</body>
+</html>

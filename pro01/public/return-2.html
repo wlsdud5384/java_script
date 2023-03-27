@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>예외 처리 구문 내부에서 return</title>
+	<script>
+		function test() {
+			try {
+				alert('A 위치입니다.')
+				throw "예외 강제 발생"
+			} catch {
+				alert('B 위치입니다.')
+				return
+			} finally {
+				alert('C 위치입니다.')
+			}
+		}
+		
+		
+		//함수 호출
+		test()
+	</script>
+</head>
+<body>
+
+</body>
+</html>

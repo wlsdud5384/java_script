@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title> 콜백 함수 원하는 매개변수만</title>
+	<script>
+		const numbers =[0,1,2,3,4,5]
+		const evenNumbers = numbers.filter(function (value, index, array) {
+			return value % 2===0
+		})
+		
+		console.log(`원래 배열: ${numbers}`)
+		console.log(`짝수만 추출: ${evenNumbers}`)
+	</script>
+</head>
+<body>
+
+</body>
+</html>

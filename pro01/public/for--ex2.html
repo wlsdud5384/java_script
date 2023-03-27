@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>for 피라미드 거꾸로</title>
+	<script>
+		let output = ''
+		
+		// 중첩 반복문
+		for (let i = 15; i > 0 ; i--) {
+			for (let j = 15; j > i; j--) {
+				output += ' '
+			}
+			for (let k= 0; k < 2 * i -1; k++) {
+				output += '*'
+			}
+			output += '\n'
+		}
+		
+		// 출력
+		console.log(output)
+	</script>
+</head>
+<body>
+
+</body>
+</html>

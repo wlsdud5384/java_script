@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>게터와 세터</title>
+	<script>
+		// 정사각형 클래스
+		class Square {
+			#length
+			
+			constructor (length) {
+				this.setLength(length)
+			}
+			
+			setLength(value){
+				if(value <= 0) {
+					throw'길이는 0보다 커야 합니다.'
+				}
+				this.#length=value
+			}
+			
+			/* getLength (value) {
+				return this.#length
+			} */
+			
+			getPerimeter() {return 4 * this.#length}
+			getArea () {return this.#length * this.#length}
+		}
+		
+		// 클래스 사용하기
+		const square = new Square(10)
+		
+		
+		console.log(`한 변의 길이는 ${square.getLength()}입니다.`)
+		
+		//예외 발생 시키기
+		square.setLength(-10)
+	</script>
+</head>
+<body>
+
+</body>
+</html>

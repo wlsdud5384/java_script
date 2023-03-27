@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+ 	<script>
+ 	
+ 	</script>
+  <style>
+  			/* 네비*/
+  		.navbar-nav {
+  			text-align: right
+  		}
+  		.nav-item1{
+  			margin-left: 150px;
+  		}
+  		.nav-item{
+  			margin-left: 100px;
+  		}
+  			/* 네비 마지막*/
+  		
+  			/* 네비 바로 밑 네비 버튼 */
+  		.div1{
+  			border: 1px solid gray;
+  			background-color: gray;
+  			text-align: center;
+  			height: 60px;
+  			padding: 10px;
+  		}
+  		.div1 .btn {
+  			margin-left: 100px;
+  		}
+  		/* 네비 바로 밑 네비 마지막*/
+  		
+  			/* 사이드바 카드*/
+  		.card {
+  			float:left;
+  			width: 15rem;
+  			margin: 20px;
+  			height: 535px;
+  		}
+  		.card-img-top {
+  			width: 238px;
+  			height: 100px;
+  		}
+  		.card-body {
+  			text-align: center;
+  		}
+  				/*사이드바 카드 마지막*/
+  				
+  				/*이미지*/
+  		.img1 {
+  			margin:0;
+  			padding:0;
+  			width: 300px;
+  			height: 270px;
+  		}		
+  		.sp1 {
+  			margin-top: 30px;
+  			color: #0489B1;
+  		}
+  		.p1 {
+  			float: right;
+  			margin-right: 900px;
+  		}
+  	</style>
+  </head>
+  <body>
+	<!-- 네비게이션 바 -->
+	<nav class="navbar navbar-expand-sm bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#" style="color: green;">DAYUN</a><a class="navbar-brand" href="#" style="color: black;">ART</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+				aria-controls="navbarScroll" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarScroll">
+			<form class="d-flex" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search"
+						aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+				<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+					style="-bs-scroll-height: 100px;">
+					<li class="nav-item1"><a class="nav-link active"
+						aria-current="page" href="#">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false"> 더보기 </a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Action</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">Something else
+									here</a></li>
+						</ul></li>
+				</ul>
+				
+			</div>
+		</div>
+	</nav>
+					<!-- 위쪽 네비 바 마지막 -->
+					<!-- 네비 밑 버튼그런거 -->
+	<div class="div1">
+	<button type="button" class="btn"style="color: white;">실내 페이지</button>
+	<button type="button" class="btn"style="color: white;">장바구니</button>
+	<button type="button" class="btn"style="color: white;">고객 갤러리</button>
+	<button type="button" class="btn"style="color: white;">주문배송</button>
+	<button type="button" class="btn"style="color: white;">질문</button>
+	</div>
+	<!-- 네비 밑 버튼 마지막 -->
+	
+	<!-- 사이드 바 -->
+	<div class="card">
+		<img src="images/ss1.jpg" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">CATEGOBY ITEM</h5><hr>
+		</div>
+		<div class="card-body">
+			<a href="#" class="card-link"style="color: green;">생활아트</a><hr>
+			<a href="#" class="card-link"style="color: green;">캔버스 아트</a><hr>
+			<a href="#" class="card-link"style="color: green;">사진 벽지</a><hr>
+			<a href="#" class="card-link"style="color: green;">창문</a><hr>
+			<a href="#" class="card-link"style="color: green;">지도</a><hr>
+			<a href="#" class="card-link"style="color: green;">롤스크린</a><hr>
+			
+	
+		</div>
+	</div><br>
+	<!-- 사이드 바 마지막 -->
+	
+	<span class="sp1"><b>붙이는 벽지 멋있음</b></span><hr>
+	<img src="images/ss1.jpg" class="img1" alt="s" >
+	<p class="p1">
+	<b>[맞춤제작] 벽지-2 (멋있음)</b><br><br>
+	
+	<b>판매가:</b> 5,216,525원<br>
+	<b>제조사:</b> 다이소<br>
+	<b>장점:</b> 원하는 사이즈 가능</p><hr>
+		
+	
+	
+
+	
+
+	<!-- 마지막 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>

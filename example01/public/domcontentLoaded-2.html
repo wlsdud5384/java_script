@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>dom 연습</title>
+	<script>
+		// DOMContentLoaded 이벤트 연결	
+		document.addEventListener('DOMContentLoaded', () => { // DOMContentLoaded 이건 그대로 써줘야함 
+			const h1 = (text) => `<h1>${text}</h1>`
+			document.body.innerHTML += h1('DOMContentLoaded 이벤트 발생이다 이게 이벤트')  // 문서 객체를 모두 읽으면 이 콜백함수가 실행된다.
+		})
+	</script>
+</head>
+<body>
+	<h1>ddd</h1>
+</body>
+</html>

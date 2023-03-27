@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>string 객체 split</title>
+	<script>
+	let input=(`일자,달러,엔,유로
+	02,1141.8,1097.46,1262.37
+	03,1148.7,1111.36,1274.65
+	04,1140.6,1107.81,1266.58
+	07,1143.4,1099.58,1267.8
+	08,1141.6,1091.91,1261.07`)
+	
+	
+		input = input.trim()
+		
+		input = input.split('\n')	// 줄바꿔주는거 그러면서 자르기?
+		
+		input = input.map((line)=>line.split(','))	// 배열로만들면서 쉼표로 자르기
+		
+		console.log(JSON.stringify(input,null,2))	// 문자로 보이게끔 
+		
+	</script>
+</head>
+<body>
+
+</body>
+</html>

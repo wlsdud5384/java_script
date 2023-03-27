@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>구 버전의 가변 매개변수</title>
+	<script>
+		function sample() {
+			console.log(arguments)
+			for(let i=0; i < arguments.length; i++) {
+				console.log(`${i}번째 요소: ${arguments[i]}`)
+			}
+		}
+		
+		sample(1,2)
+		sample(1,2,3)
+		sample(1,2,3,4)
+	</script>
+</head>
+<body>
+
+</body>
+</html>

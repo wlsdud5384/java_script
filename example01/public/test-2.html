@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+
+<title></title>
+
+	<script>
+	var scope = {
+		    w : window,
+		    jQ : jQuery
+		};
+
+
+		/**
+		 * ----------------------------
+		 * @Plug-in Tab Menu Type
+		 * ----------------------------
+		 **/
+		(function (param) {
+			
+			var global = param.w,
+			    $      = param.jQ;
+			
+			var pluginName = 'uiTab';
+			
+			function TabPlugin($selector, options) {
+				this.$selector = $selector;
+				this.detect = {};
+				this.config = $.extend({}, this.defaults, options || {});
+				
+				if (!this.$selector.length) return;
+				
+				this._init();
+			}
+			
+			TabPlugin.prototype = {
+				constructor :  TabPlugin.prototype,
+				defaults : {
+					menuItemClass : '.tabItem',
+					contentClass : '.panel',
+					isSelected : 'is-selected',
+					visibleContent : 1
+				},
+				_init : function () {
+					this.setting();
+					this._setEvent();
+					this._defaultShowing();
+				},
+				setting : function () {
+					this.detect.$selector = this.$selector;
+					this.detect.$items    = this.detect.$selector.find(this.config.menuItemClass + ' a');
+				},
+				_setEvent : function () {
+					
+					var self = this;
+					$(document).on('click.ui.tab', this.config.menuItemClass + ' a' , function (e) {
+						e.preventDefault();
+						var target     = this,
+						    $showTabContent = $(target.hash);
+						
+						self._hidePanels($(target), $showTabContent);
+						self._showPanels($(target), $showTabContent);
+					})
+				},
+				_showPanels : function ($this, $showContent) {
+					this.$targetItem.addClass(this.config.isSelected);
+					$showContent.addClass(this.config.isSelected);
+				},
+				_hidePanels : function ($this, $showContent) {
+					this.$targetItem = $this.closest('li');
+					var isActived = this.$targetItem.siblings('.' + this.config.isSelected);
+					
+					if (!!isActived) {
+						isActived.removeClass(this.config.isSelected);
+					}
+					
+					$showContent.siblings(this.config.contentClass).removeClass(this.config.isSelected);
+				},
+				_defaultShowing : function () {
+					this.detect.$items.eq(this.config.visibleContent - 1).trigger('click');
+				}
+				
+			};
+			
+			$.fn[pluginName] = $.fn[pluginName] || function (options) {
+						var $this = this;
+						return $.each($this, function (idx, el) {
+							var $selector = $this.eq(idx);
+							if (!$.data(this, 'plugin_' + pluginName)) {
+								$.data(this, 'plugin_' + pluginName, new TabPlugin($selector, options))
+							}
+							return $selector;
+						})
+					};
+			
+			$(function () {
+				/**
+				 * [data-*] 로 플러그인 호출 권장
+				 * @param @type {} : 플러그인 옵션값
+				 * 기본값 { menuItemClass : '.tabItem', isSelected : 'is-selected', visibleContent : 1}
+				 */
+				/* // 탭 메뉴 플러그인 사용법
+				 $('[data-tab="***"]').koicaTabs({
+				 menuItemClass : ".tabItem", // 탭 메뉴의 li 클래스 사용자 정의
+				 isSelected : "is-selected", // 탭 메뉴 활성화 클래스
+				 contentClass : '.panel', // 탭 콘텐츠 클래스
+				 visibleContent: 1 // 처음에 보여줄 탭 메뉴 및 콘텐츠
+				 });
+				 */
+				$('[data-tab="tabs"]').uiTab();
+			});
+			
+		})(scope);
+	
+	
+	</script>
+
+
+	<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	width: 500px;
+	margin: 50px auto;
+	font-size: 12px;
+}
+a {
+	color: #333;
+	text-decoration: none;
+	line-height: 1.2;
+}
+ul, li {
+	list-style: none;
+}
+h1 {
+	margin-bottom: 15px;
+	color: #333;
+}
+.a11y {
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+}
+.main-tab {
+	width: 355px;
+}
+/* tab-style */
+[class*="tabList"] .tabItem {
+	float: left;
+	width: 50%;
+}
+[class*="tabList"]:before, 
+[class*="tabList"]:after {
+	display: table;
+	content: "";
+}
+[class*="tabList"]:after {
+	clear: both;
+}
+[class*="tabList"] .tabItem a {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-left: -1px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 13px;
+	font-weight: bold;
+	background: #f6f6f6;
+	padding: 13px 0;
+	border: 1px solid #e9e9e9;
+	color: #8d8d8d;
+}
+
+[class*="tabList"] .tabItem a:after {
+	content: "";
+	left: -65%;
+	opacity: 1;
+	position: absolute;
+	top: 0;
+	background: red;
+	width: 50%;
+	height: 100%;
+	background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 100%);
+	background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0.6)));
+	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 100%);
+	-webkit-transform: skewX(-25deg);
+	transform: skewX(-25deg);
+	-webkit-transition: all 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+	transition: all 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+}
+[class*="tabList"] .tabItem a:hover:after {
+	-webkit-animation: shine .75s;
+	animation: shine .75s;
+}
+[class*="tabList"] .tabItem.is-selected a {
+	background: #fff;
+	color: #568113;
+}
+[class*="tabList"] .tabItem.is-selected a:hover:after {
+	-webkit-animation: -1s;
+	animation: -1s;
+}
+.tabList-v1 .tabItem {
+	width: auto;
+}
+.tabList-v1 .tabItem a {
+	padding-left: 18px;
+	padding-right: 18px;
+}
+
+.tabPanel {
+	padding: 20px 5px 14px 0;
+}
+
+.tabPanel .panel {
+	display: none;
+}
+
+.tabPanel .panel.is-selected {
+	display: block;
+}
+
+.tabPanel .panel li {
+	margin-bottom: 14px;
+}
+
+.tabPanel .panel li a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inherit;
+	font-size: 13px;
+}
+.tabPanel .panel li a:hover {
+	color: #3bafda;
+}
+
+.tabPanel .panel .panel-item {
+	text-align: right;
+	padding-right: 10px;
+}
+
+.tabPanel .panel .panel-item a {
+	float: left;
+	width: 240px;
+	text-align: left;
+}
+
+.tabPanel .panel .panel-item .date {
+	display: inline-block;
+}
+
+@-webkit-keyframes shine {
+	100% {
+		left: 125%;
+	}
+}
+
+@keyframes shine {
+	100% {
+		left: 125%;
+	}
+}
+</style>
+
+</head>
+<body>
+<h1>Tab Menu Plugin Type</h1>
+<div class="main-tab">
+	<h4 class="a11y">모집공고에 관한 탭 목록입니다.</h4>
+	<ul class="tabList-v1" data-tab="tabs">
+		<li class="tabItem is-selected"><a href="#tab01-1">모집</a></li>
+		<li class="tabItem"><a href="#tab01-2">합격자 발표</a></li>
+		<li class="tabItem"><a href="#tab01-3">국내교육 안내</a></li>
+		<li class="tabItem"><a href="#tab01-4">기타</a></li>
+	</ul>
+	<div class="tabPanel">
+		<h4 class="a11y">모집에 대한 내용입니다.</h4>
+		<ul id="tab01-1" class="panel is-selected">
+			<li>
+				<a href="#none">2017년 1차 글로벌새마을청년봉사단(제3기) 국내교육을 시행합니다.</a>
+			</li>
+			<li>
+				<a href="#none">(수정)2017년 3차 월드프렌즈 코이카봉사단(115기) 모집을 합니다.</a>
+			</li>
+			<li>
+				<a href="#none">2017년 2차 월드프렌즈 코디네이터 모집,선발을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">제 2기 KOICA-UNV 대학봉사단 활동국가 미리보기 강연을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">(수정)114기 월드프렌즈 코이카봉사단 모집(~12.26)을 실시합니다.</a>
+			</li>
+		</ul>
+		<h4 class="a11y">합격자 발표에 대한 내용입니다.</h4>
+		<ul id="tab01-2" class="panel">
+			<li>
+				<a href="#none">2017년 1차 글로벌새마을청년봉사단(제3기) 국내교육을 시행합니다.</a>
+			</li>
+			<li>
+				<a href="#none">2017년 2차 월드프렌즈 코디네이터 모집,선발을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">(수정)2017년 3차 월드프렌즈 코이카봉사단(115기) 모집을 합니다.</a>
+			</li>
+			<li>
+				<a href="#none">(수정)114기 월드프렌즈 코이카봉사단 모집(~12.26)을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">제 2기 KOICA-UNV 대학봉사단 활동국가 미리보기 강연을 실시합니다.</a>
+			</li>
+		</ul>
+		<h4 class="a11y">국내교육에 대한 내용입니다.</h4>
+		<ul id="tab01-3" class="panel">
+			<li>
+				<a href="#none">2017년 2차 월드프렌즈 코디네이터 모집,선발을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">2017년 1차 글로벌새마을청년봉사단(제3기) 국내교육을 시행합니다.</a>
+			</li>
+			<li>
+				<a href="#none">(수정)2017년 3차 월드프렌즈 코이카봉사단(115기) 모집을 합니다.</a>
+			</li>
+			<li>
+				<a href="#none">제 2기 KOICA-UNV 대학봉사단 활동국가 미리보기 강연을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">(수정)114기 월드프렌즈 코이카봉사단 모집(~12.26)을 실시합니다.</a>
+			</li>
+		</ul>
+		<h4 class="a11y">기타에 대한 내용입니다.</h4>
+		<ul id="tab01-4" class="panel">
+			<li>
+				<a href="#none">(수정)114기 월드프렌즈 코이카봉사단 모집(~12.26)을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">2017년 2차 월드프렌즈 코디네이터 모집,선발을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">2017년 1차 글로벌새마을청년봉사단(제3기) 국내교육을 시행합니다.</a>
+			</li>
+			<li>
+				<a href="#none">제 2기 KOICA-UNV 대학봉사단 활동국가 미리보기 강연을 실시합니다.</a>
+			</li>
+			<li>
+				<a href="#none">(수정)2017년 3차 월드프렌즈 코이카봉사단(115기) 모집을 합니다.</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<br /><br />
+<div class="main-tab v1">
+	<h3 class="a11y">기수별 게시판, 국가별 게시판 탭 목록입니다.</h3>
+	<ul class="tabList" data-tab="tabs">
+		<li class="tabItem is-selected"><a href="#tab03-1">기수별 게시판</a></li>
+		<li class="tabItem"><a href="#tab03-2">국가별 게시판</a></li>
+	</ul>
+	<div class="tabPanel">
+		<h4 class="a11y">기수별 게시판에 대한 내용입니다.</h4>
+		<ul id="tab03-1" class="panel is-selected">
+			<li class="panel-item">
+				<a href="#none">동티모르 커뮤니티 방 신설을 요청합니다.</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none">안녕하세요. 도미니카 Las Terrenas 에서 당신을..</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none"><strong>[콜롬비아]</strong>[문의 및 요청] 파견증명서 출력을 요청</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none"><strong>[도미니카공화국]</strong> 활동기관명 재변경 요청합니다.</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none"><strong>[콜롬비아]</strong>[문의 및 요청] 파견증명서 출력을 요청</a>
+				<span class="date">2016-09-07</span>
+			</li>
+		</ul>
+		<h4 class="a11y">국가별 게시판에 대한 내용입니다.</h4>
+		<ul id="tab03-2" class="panel">
+			<li class="panel-item">
+				<a href="#none"><strong>[콜롬비아]</strong>[문의 및 요청] 파견증명서 출력을 요청</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none">동티모르 커뉴니티 방 신설을 요청합니다.</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none"><strong>[도미니카공화국]</strong> 활동기관명 재변경 요청합니다.</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none">안녕하세요. 도미니카 Las Terrenas 에서 당신을..</a>
+				<span class="date">2016-09-07</span>
+			</li>
+			<li class="panel-item">
+				<a href="#none"><strong>[콜롬비아]</strong>[문의 및 요청] 파견증명서 출력을 요청</a>
+				<span class="date">2016-09-07</span>
+			</li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

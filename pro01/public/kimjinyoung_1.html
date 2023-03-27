@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>스크립트 시험</title>
+	<script>
+		// 1번문제 시작
+	document.addEventListener('DOMContentLoaded', () => {
+		  const select = document.querySelector('select')
+		  const p = document.querySelector('p')
+		  
+		  select.addEventListener('change', (event) => {
+		  const options = event.currentTarget.options
+		 const index = event.currentTarget.options.selectedIndex
+		 
+	 p.textContent = `선택: ${options[index].textContent}`
+		}) 
+	})
+	//1번문제 끝
+	
+	//2번문제 시작
+		document.addEventListener('DOMContentLoaded',() => {
+			const output = document.querySelector('#output')
+			const radios= document.querySelectorAll('[name=pet]')
+			
+			radios.forEach((radio) => {
+				radio.addEventListener('change', (event) => {
+					const current = event.currentTarget
+					if(current.checked) {
+						output.textContent =`선택하신것은 가위,바위,보중에 \t${current.value}시네요`
+					}
+				})				
+			})
+		})
+		//2번문제 끝
+		
+		
+	</script>
+</head>
+<body>
+
+<!-- 1111111111111111111111111111111111 -->
+	<select>
+		<option>내맘이야-꽝-</option>
+		<option>가위</option>
+		<option>바위</option>
+		<option>보</option>
+	</select>
+	<p></p>
+
+
+
+
+<!-- 222222222222222222222222222222222 -->
+	<h3>#가위 바위 보 선택하기 </h3>
+	<input type="radio" name="pet" value="가위">
+	<span>가위</span>
+	<input type="radio" name="pet" value="바위">
+	<span>바위</span>
+	<input type="radio" name="pet" value="보">
+	<span>보</span>
+	<hr>
+	<h3 id="output"></h3>
+</body>
+</html>
